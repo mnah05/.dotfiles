@@ -1,46 +1,16 @@
-# Appearance
-font-family = "JetBrainsMono Nerd Font Mono"
-font-size = 18
-theme = dark:Catppuccin Mocha,light:Catppuccin Latte
-background-opacity = 0.94
-background-opacity-cells = true
-background-blur = true
-minimum-contrast = 1.1
-
-# Window layout
-window-padding-x = 14
+font-size = 19
+font-thicken = true
+command = /bin/zsh -l
+background-opacity = 0.95
+background-blur-radius = 20
+mouse-hide-while-typing = true
+window-decoration = true
+macos-option-as-alt = true
+theme = Catppuccin Mocha
+macos-titlebar-style = hidden
+cursor-style-blink = false
+cursor-style=block
+window-padding-x = 10
 window-padding-y = 10
 window-padding-balance = true
-window-padding-color = extend
-window-width = 150
-window-height = 42
-window-save-state = always
-window-new-tab-position = current
-window-inherit-working-directory = true
-tab-inherit-working-directory = true
-split-inherit-working-directory = true
-split-preserve-zoom = navigation
-macos-titlebar-style = tabs
-scrollbar = never
-
-# Cursor and mouse
-cursor-style = block
-cursor-style-blink = false
-cursor-opacity = 0.90
-cursor-click-to-move = true
-mouse-hide-while-typing = true
-
-# Shell integration
-shell-integration = detect
-shell-integration-features = no-cursor,path
-
-# Scrollback and clipboard
-scrollback-limit = 50000000
-clipboard-paste-protection = true
-clipboard-trim-trailing-spaces = true
-copy-on-select = true
-
-# Notifications for commands completed while unfocused
-notify-on-command-finish = unfocused
-notify-on-command-finish-action = notify
-notify-on-command-finish-after = 10s
+shell-integration-features = no-cursor

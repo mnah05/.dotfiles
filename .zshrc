@@ -26,7 +26,6 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
 
 export GOPATH="$HOME/go"
-export BUN_INSTALL="$HOME/.bun"
 
 # ─── PATH ─────────────────────────────────────────────────
 typeset -U path PATH fpath   # keep entries unique
@@ -314,9 +313,6 @@ ztime() { for _ in 1 2 3; do /usr/bin/time zsh -i -c exit; done }
 # ─── Prompt ───────────────────────────────────────────────
 command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 
-# ─── bun completions ──────────────────────────────────────
-[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
-
 # ─── Plugins (must be last; syntax-highlighting very last) ─
 _zp="${HOMEBREW_PREFIX:-/opt/homebrew}/share"
 
@@ -340,3 +336,19 @@ fi
 unset _zp
 
 # zprof   # uncomment together with zmodload line at the top
+
+# ─── Java (Temurin 25 LTS) ───
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-25.jdk/Contents/Home
+export PATH="$JAVA_HOME/bin:$PATH"
+
+alias av='aws-vault'
+
+# pnpm
+export PNPM_HOME='/Users/mnah/Library/pnpm'
+case ":$PATH:" in
+  ":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+
+

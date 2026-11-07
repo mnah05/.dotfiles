@@ -1,11 +1,17 @@
 # Return early for non-interactive shells (scp, rsync, etc.)
 [[ $- != *i* ]] && return
 
+# ==========================================================
+# Homebrew
+# ==========================================================
+if [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # ==========================================================
 # Editor
 # ==========================================================
-export EDITOR=nvim
+export EDITOR=vim
 export VISUAL="$EDITOR"
 
 # ==========================================================
@@ -13,12 +19,11 @@ export VISUAL="$EDITOR"
 # ==========================================================
 export PATH="$HOME/.local/bin:$HOME/.grok/bin:$HOME/go/bin:$PATH"
 
+# Antigravity IDE
+export PATH="$HOME/.antigravity-ide/antigravity-ide/bin:$PATH"
 
 # Rust
 export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
-
-# OpenCode
-export PATH="$HOME/.opencode/bin:$PATH"
 
 # ==========================================================
 # History
@@ -84,6 +89,16 @@ alias aws-login='aws-vault exec hasan -- bash'
 # OpenCode
 alias oc='opencode'
 
+# ==========================================================
+# Fast
+# ==========================================================
+unalias fast 2>/dev/null
+
+if command -v fast >/dev/null 2>&1; then
+    fast() {
+        command fast --verbose "$@"
+    }
+fi
 
 export PUPPETEER_EXECUTABLE_PATH="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
@@ -123,9 +138,39 @@ if command -v delta >/dev/null 2>&1; then
     export GIT_PAGER=delta
 fi
 
+# ==========================================================
+# Namaz
+# ==========================================================
+if [ -x "$HOME/.local/bin/namaz" ]; then
+    alias namaz="$HOME/.local/bin/namaz"
+fi
 
 # ==========================================================
 # Bun
 # ==========================================================
 [ -s "$HOME/.bun/_bun.bash" ] && source "$HOME/.bun/_bun.bash"
+# ==========================================================
+# Bash completion (bash-completion@2)
+# Must load before tool-specific completions below
+# ==========================================================
+if [ -f /opt/homebrew/etc/profile.d/bash_completion.sh ]; then
+    . /opt/homebrew/etc/profile.d/bash_completion.sh
+fi
+
+# Grok
+if [ -f "$HOME/.grok/completions/bash/grok.bash" ]; then
+    . "$HOME/.grok/completions/bash/grok.bash"
+fi
+
+# opencode
+if command -v opencode >/dev/null 2>&1; then
+    eval "$(opencode --completions bash 2>/dev/null)"
+fi
+
 #
+## ==========================================================
+## Starship (disabled)
+## ==========================================================
+#if command -v starship >/dev/null 2>&1; then
+#    eval "$(starship init bash)"
+#fi
