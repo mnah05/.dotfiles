@@ -1,0 +1,24 @@
+name: Validate dotfiles
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shell-syntax:
+    name: Check shell syntax
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check Bash files
+        run: bash -n .bashrc brave.sh
+
+      - name: Check Zsh files
+        run: zsh -n .zshrc zsh/plugins.zsh
